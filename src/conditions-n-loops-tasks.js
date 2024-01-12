@@ -123,6 +123,32 @@ function isIsoscelesTriangle(a, b, c) {
 function convertToRomanNumerals(/* num */) {
   throw new Error('Not implemented');
 }
+// function convertToRomanNumerals(num) {
+//   const dictionary = {
+//     26: 'XXVI',
+//     1: 'I',
+//     2: 'II',
+//     5: 'V',
+//     4: 'IV',
+//     10: 'X',
+//     9: 'IX',
+//   };
+//   const keys = [26, 10, 9, 5, 4, 2, 1];
+
+//   let result = '';
+//   let number = num;
+//   for (let i = 0; i < keys.length; i += 1) {
+//     while (number >= keys[i]) {
+//       result += dictionary[keys[i]];
+//       number -= keys[i];
+//     }
+//   }
+//   return result;
+// }
+
+// console.log(convertToRomanNumerals(4));
+// console.log(convertToRomanNumerals(26));
+// console.log(convertToRomanNumerals(37));
 
 /**
  * Converts a number to a string, replacing digits with words.
@@ -139,8 +165,44 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  const wordList = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  for (let i = 0; i < numberStr.length; i += 1) {
+    if (+numberStr[i] >= 0) {
+      result += wordList[numberStr[i]];
+      if (i !== numberStr.length - 1) {
+        result += ' ';
+      }
+    } else {
+      switch (numberStr[i]) {
+        case '.':
+          result += i !== numberStr.length - 1 ? 'point ' : 'point';
+          break;
+        case '-':
+          result += i !== numberStr.length - 1 ? 'minus ' : 'minus';
+          break;
+        case ',':
+          result += i !== numberStr.length - 1 ? 'point ' : 'point';
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  return result;
 }
 
 /**
